@@ -1,0 +1,10 @@
+/* אנימציה: ציור הדרגתי של קשתות הזווית בלבד */
+.angle-arc.animated {
+  stroke-dasharray: 120;
+  animation: draw-arc 0.9s ease forwards;
+}
+
+@keyframes draw-arc {
+  from { stroke-dashoffset: 120; opacity: 0; }
+  to   { stroke-dashoffset: 0;   opacity: 1; }
+}
