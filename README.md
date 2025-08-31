@@ -1,12 +1,76 @@
-# React + Vite
+# Triangle Homework
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Development exercise – building an interface to display a triangle and its angles.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to Run
 
-## Expanding the ESLint configuration
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Open the browser at:
+   ```
+   http://localhost:5173
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Application Structure
+
+- **InputPage (/input)**  
+  Allows the user to input three points (X, Y).  
+  Includes a button *"Show Triangle"* which navigates to the display page.
+
+- **DisplayPage (/display)**  
+  - Draws the triangle in an **SVG** area of 800×800 pixels.  
+  - At each vertex, a small arc is drawn to mark the angle.  
+  - The numeric values of the three angles are displayed inside the triangle.  
+  - Includes a button *"Highlight Angles"* which toggles an animation on the arcs.
+
+- **TriangleView Component**  
+  Responsible for all geometry calculations (vectors, dot products, angles) and for rendering the triangle and arcs inside the SVG.
+
+---
+
+## Required Explanations
+
+1. **Which method did I use to draw the triangle? Why?**  
+   I used **SVG elements** (`<polygon>`, `<path>`, `<text>`).  
+   SVG was chosen because it provides sharp rendering at any zoom level, precise control over coordinates, and flexible styling options.
+
+2. **How did I calculate the angle values?**  
+   For each vertex, I computed the angle between two outgoing vectors using the dot product formula:  
+   ```
+   angle = arccos( (u · v) / (|u||v|) )
+   ```
+   The result is converted from radians to degrees.
+
+3. **What was challenging in the exercise?**  
+   Positioning the arcs and the angle labels so that they are always clear and visible, even when the triangle is very narrow, obtuse, or acute.
+
+4. **Is there anything I did not manage to solve? Gaps?**  
+   I did not implement advanced validation of the input points. For example, preventing overlapping points or handling the case where all three points lie on the same line.
+
+5. **Did I use any external tools (including AI)?**  
+   Yes – I used ChatGPT as a helper for geometric calculations and design ideas.  
+   However, the overall structure, decisions, and final solution were done independently.
+
+---
+
+## Additional Considerations
+
+- **Usability** – clear forms for entering points, intuitive button to toggle angle highlighting.  
+- **Clean Code** – project split into dedicated files/components (`InputPage`, `DisplayPage`, `TriangleView`).  
+- **Independent Thinking** – while not perfect, the solution shows understanding of React, SVG, and basic geometry.
+
+---
+
+## Credit
+
+This project was built as part of a home assignment.
